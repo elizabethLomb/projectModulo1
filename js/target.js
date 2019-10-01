@@ -31,17 +31,11 @@ class Target {
     return colX && colY
   }
 
-  // setListeners(){
-  //   canvas.onmousedown = (e) => {
-  //     console.log('down');
-  //   }
-
-  //   canvas.onmouseup = (e) => {
-  //     console.log('up');
-  //   }
-
-  //   canvas.mousemove = (e) => {
-  //     console.log('up');
-  //   }
-  // }
+  setListeners(){
+    document.onkeydown = (e) => {
+      if(e.clientX){
+        console.log('down');
+      }
+    }
+  }
 }

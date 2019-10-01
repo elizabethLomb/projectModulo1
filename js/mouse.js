@@ -1,8 +1,8 @@
-let isMoving = false;
+let isClicking = false;
 
 canvas.addEventListener('mousedown', e => {
   x = e.clientX;
   y = e.clientY;
-  isMoving = true;
+  isClicking = true;
   console.log(`x: ${x}, y: ${y}`)
 });
