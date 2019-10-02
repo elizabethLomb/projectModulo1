@@ -57,12 +57,7 @@ class Game {
   }
 
   checkCollisions(){
-    const col = this.target.some(t => {
-      return t.collide(this)
-    })
-    if(col){
-      console.log('collision')
-    }
+    true
   }
 
   mousePosition(e){
@@ -74,20 +69,21 @@ class Game {
   }
   
   eventListeners(){
-    this.ctx.canvas.addEventListener('mousedown', e => {
-      console.log(`La Chancla is Flying at X: ${this.mouseX} Y: ${ this.mouseY}`)
-      
-      this.target.forEach(t => {
-        this.checkCollisions();
-      })
-    });
+    this.ctx.canvas.addEventListener('mousemove', this.mouseMove.bind(this));
 
-    this.ctx.canvas.addEventListener('mousemove', e => {
-      const clickPos = this.mousePosition(e);
-      this.mouseX = clickPos.x;
-      this.mouseY = clickPos.y;
-      console.log(`x: ${this.mouseX}, y: ${this.mouseY}`) 
-    });
+    this.ctx.canvas.addEventListener('mousedown', this.mouseDown.bind(this));
+    // this.ctx.canvas.addEventListener('mousedown', e => {
+    //   console.log(`La Chancla is Flying at X: ${this.mouseX} Y: ${ this.mouseY}`)
+
+      
+    // });
+
+    // this.ctx.canvas.addEventListener('mousemove', e => {
+    //   const clickPos = this.mousePosition(e);
+    //   this.mouseX = clickPos.x;
+    //   this.mouseY = clickPos.y;
+    //   console.log(`x: ${this.mouseX}, y: ${this.mouseY}`) 
+    // });
   }
 
 }
