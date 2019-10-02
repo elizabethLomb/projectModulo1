@@ -2,26 +2,29 @@ class Game {
 	constructor(ctx){
 		this.ctx = ctx;
 		this.intervalId = null;
-    this.tick = 0
+    this.tick = 0;
+    this.mouseX;
+    this.mouseY;
 
-    //this.target = new Target(ctx)
-    this.target = []
+    this.hits = 0; //aciertos
+    this.target = [] //targets on stage
 	}
 
 	//inicializa el juego
 	start() {
-    this.runAnimationLoop()
+    this.runAnimationLoop();
+    this.eventListeners();
   }
 
-	//animation loop
+	//animation loop 
 	runAnimationLoop() {
     this.intervalId = setInterval(() => {
       this.clear()
       this.draw()
       this.move()
       this.addTarget()
+      this.checkCollisions()
       this.clearTarget()
-      this.checkClick()
 
       if (this.tick++ > 10000) {
         this.tick = 0
@@ -30,9 +33,7 @@ class Game {
   }
 
   clearTarget(){
-    this.target = this.target.filter(t => {
-      return t.y + t.h >= 0
-    })
+    this.target = this.target.filter( t => t.isVisible())
   }
 
   addTarget(){
@@ -44,7 +45,7 @@ class Game {
   }
 
 	clear() {
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)   
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height) 
   }
 
 	draw() {
@@ -54,11 +55,39 @@ class Game {
 	move(){
     this.target.forEach(t => t.move());
   }
+
+  checkCollisions(){
+    const col = this.target.some(t => {
+      return t.collide(this)
+    })
+    if(col){
+      console.log('collision')
+    }
+  }
+
+  mousePosition(e){
+    const rect = this.ctx.canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    }
+  }
   
-  checkClick(){
-    // const col = this.target.some(t => {
-    //   return t.collide(this.mouse)
-    // })
+  eventListeners(){
+    this.ctx.canvas.addEventListener('mousedown', e => {
+      console.log(`La Chancla is Flying at X: ${this.mouseX} Y: ${ this.mouseY}`)
+      
+      this.target.forEach(t => {
+        this.checkCollisions();
+      })
+    });
+
+    this.ctx.canvas.addEventListener('mousemove', e => {
+      const clickPos = this.mousePosition(e);
+      this.mouseX = clickPos.x;
+      this.mouseY = clickPos.y;
+      console.log(`x: ${this.mouseX}, y: ${this.mouseY}`) 
+    });
   }
 
 }

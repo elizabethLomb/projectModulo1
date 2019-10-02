@@ -25,17 +25,16 @@ class Target {
   }
 
   collide(el) {
-    const colX = el.x + el.w > this.x && el.x < this.x + this.w
-    const colY = el.y + el.h > this.y && el.y < this.y + this.h
-
-    return colX && colY
+    const collideX = el.x + el.w > this.x && el.x < this.x + this.w
+    const collideY = el.y + el.h > this.y && el.y < this.y + this.h
+ 
+    return collideX && collideY
   }
 
-  setListeners(){
-    document.onkeydown = (e) => {
-      if(e.clientX){
-        console.log('down');
-      }
-    }
+  isVisible() {
+    return (
+      this.x + this.w > 0
+    )
   }
+
 }
