@@ -10,6 +10,9 @@ class Player {
     this.w = 48;
     this.h = 55;
 
+    this.dx;
+    this.dy;
+
     this.vx = 0;
 
     this.img = new Image();
@@ -22,6 +25,7 @@ class Player {
     this.setListeners()
 
     this.chanclas = []
+    this.chanclaShoot = false;
   }
 
   draw(){
@@ -49,20 +53,35 @@ class Player {
   animate(){
     if(this.tick++ < 8) return
 
-    this.tick = 0
-    if (++this.img.frameIndex >= this.img.frames) {
-      this.img.frameIndex = 0
+    this.tick = 0;
+    if (this.chanclaShoot) {
+      this.img.frameIndex++
+    }
+    if (this.img.frameIndex >= this.img.frames) {
+      this.img.frameIndex = 0;
+      this.chanclaShoot = false;
     }
   }
 
-  shoot(){
-    this.chanclas.push(
-      new Chancla(
-        this.ctx,
-        this.x + this.w,
-        this.y + this.h / 2
+  mousePos(e) {
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
+  }
+
+  shoot(event){
+    this.chanclaShoot = true;
+    setTimeout(() => {
+      this.chanclas.push(
+        new Chancla(
+          this.ctx,
+          this.x + this.w,
+          this.y + this.h / 2,
+          event.clientX, event.clientY
+        )
       )
-    )
+    }, 500);
   }
 
   clearChanclas() {
@@ -70,18 +89,21 @@ class Player {
   }
 
   setListeners(){
+    //mousemove
+    this.ctx.canvas.addEventListener('mousemove', (e)=> {
+      // let mousecoords = this.mousePos(e);
+    });
 
     //clickdown
     this.ctx.canvas.addEventListener('mousedown', (e)=> {
-      this.shoot()
+      this.shoot(e);
+      //this.mouseUpdate();
     });
 
     //clickup
     this.ctx.canvas.addEventListener('mouseup', (e)=> {
       //this.shoot()
     });
-
-
   }
 
 

@@ -1,25 +1,34 @@
 class Chancla {
-  constructor(ctx, x, y, r){
+  constructor(ctx, x, y, endX, endY){
     this.ctx = ctx;
     this.y = y;
     this.x = x;
     this.r = 5;
 
-    this.w = 2 * this.r
-    this.h = this.w
+    this.endX = endX;
+    this.endY = endY;
 
-    this.vx = 10;
+    this.w = 30
+    this.h = 30
+
+    this.vx = 5;
+    this.vy = 5;
   }
 
   draw() {
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-    this.ctx.fill();
-    this.ctx.closePath()
+    this.ctx.rect(this.x, this.y, this.w, this.h);
+    this.ctx.stroke();
   }
 
   move() {
-    this.x += this.vx
+    if((this.x + this.w / 2) < this.endX) {
+      this.x += this.vx
+    }
+    if(this.y > this.endY) {
+      this.y -= this.vy
+    }
+    // this.y -= this.vy
   }
 
   isVisible() {

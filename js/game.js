@@ -67,24 +67,29 @@ class Game {
   /////// listeners ---------------------------
 
   mousePosition(e){
-    const rect = this.ctx.canvas.getBoundingClientRect();
-    return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    }
+    // const rect = this.ctx.canvas.getBoundingClientRect();
+    // return {
+    //   x: e.clientX - rect.left,
+    //   y: e.clientY - rect.top,
+    // }
   }
 
   mouseUp(){
-    console.log('moving');
+    //console.log('not click');
   }
 
-  mouseDown(){
-    console.log('click');
+  mouseDown(e){
+    console.log('click => ', e);
+  }
+
+  mouseMove(e){
+    //console.log(e);
   }
   
   eventListeners(){
     this.ctx.canvas.addEventListener('mousedown', this.mouseDown, false);
     this.ctx.canvas.addEventListener('mouseup', this.mouseUp, false);
+    this.ctx.canvas.addEventListener('mousemove', this.mouseMove, false);
   }
 
 }
