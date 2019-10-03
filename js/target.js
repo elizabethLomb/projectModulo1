@@ -8,7 +8,7 @@ class Target {
     this.x = this.ctx.canvas.width + this.w
     this.y = Math.random() * this.ctx.canvas.height - this.h
 
-    this.vx = -3
+    this.vx = -5
   }
 
   draw(){

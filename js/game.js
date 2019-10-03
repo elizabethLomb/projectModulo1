@@ -6,8 +6,10 @@ class Game {
     this.mouseX;
     this.mouseY;
 
-    this.hits = 0; //aciertos
+    //this.hits = 0; //aciertos
     this.target = [] //targets on stage
+
+    this.player = new Player(ctx);
 	}
 
 	//inicializa el juego
@@ -29,7 +31,7 @@ class Game {
       if (this.tick++ > 10000) {
         this.tick = 0
       }
-    }, 1000 / 60)
+    }, 1000 / 60) 
   }
 
   clearTarget(){
@@ -49,16 +51,20 @@ class Game {
   }
 
 	draw() {
+    this.player.draw();
     this.target.forEach(t => t.draw()); 
   }
 
 	move(){
+    this.player.move();
     this.target.forEach(t => t.move());
   }
 
   checkCollisions(){
     true
   }
+
+  /////// listeners ---------------------------
 
   mousePosition(e){
     const rect = this.ctx.canvas.getBoundingClientRect();
@@ -67,23 +73,18 @@ class Game {
       y: e.clientY - rect.top,
     }
   }
+
+  mouseUp(){
+    console.log('moving');
+  }
+
+  mouseDown(){
+    console.log('click');
+  }
   
   eventListeners(){
-    this.ctx.canvas.addEventListener('mousemove', this.mouseMove.bind(this));
-
-    this.ctx.canvas.addEventListener('mousedown', this.mouseDown.bind(this));
-    // this.ctx.canvas.addEventListener('mousedown', e => {
-    //   console.log(`La Chancla is Flying at X: ${this.mouseX} Y: ${ this.mouseY}`)
-
-      
-    // });
-
-    // this.ctx.canvas.addEventListener('mousemove', e => {
-    //   const clickPos = this.mousePosition(e);
-    //   this.mouseX = clickPos.x;
-    //   this.mouseY = clickPos.y;
-    //   console.log(`x: ${this.mouseX}, y: ${this.mouseY}`) 
-    // });
+    this.ctx.canvas.addEventListener('mousedown', this.mouseDown, false);
+    this.ctx.canvas.addEventListener('mouseup', this.mouseUp, false);
   }
 
 }
