@@ -1,5 +1,3 @@
-const SPACE_KEY = 32
-
 class Player {
   constructor (ctx, x, y) {
     this.ctx = ctx;
@@ -7,8 +5,8 @@ class Player {
     this.x = 0;
     this.y = 0.75 * this.ctx.canvas.height;
 
-    this.w = 48;
-    this.h = 55;
+    this.w = 160;
+    this.h = 190;
 
     this.dx;
     this.dy;
@@ -42,7 +40,7 @@ class Player {
     );
 
     this.animate();
-    this.chanclas.forEach(c => c.draw())
+    this.chanclas.forEach(chancla => chancla.draw())
   }
 
   move(){
@@ -61,13 +59,6 @@ class Player {
       this.img.frameIndex = 0;
       this.chanclaShoot = false;
     }
-  }
-
-  mousePos(e) {
-    return {
-      x: e.clientX,
-      y: e.clientY
-    };
   }
 
   shoot(event){

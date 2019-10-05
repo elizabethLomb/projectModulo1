@@ -6,10 +6,12 @@ class Game {
     this.mouseX;
     this.mouseY;
 
+    this.bg = new Background(ctx)
+    this.player = new Player(ctx);
+
     //this.hits = 0; //aciertos
     this.target = [] //targets on stage
 
-    this.player = new Player(ctx);
 	}
 
 	//inicializa el juego
@@ -51,6 +53,7 @@ class Game {
   }
 
 	draw() {
+    this.bg.draw()
     this.player.draw();
     this.target.forEach(t => t.draw()); 
   }
@@ -66,30 +69,25 @@ class Game {
 
   /////// listeners ---------------------------
 
-  mousePosition(e){
-    // const rect = this.ctx.canvas.getBoundingClientRect();
-    // return {
-    //   x: e.clientX - rect.left,
-    //   y: e.clientY - rect.top,
-    // }
-  }
+  eventListeners(event){
+    //mousemove
+    this.ctx.canvas.addEventListener('mousemove', (event)=> {
+      this.mouseX = event.clientX;
+      this.mouseY = event.clientY;
+      console.log(this.mouseX, this.mouseY);
 
-  mouseUp(){
-    //console.log('not click');
-  }
+    });
 
-  mouseDown(e){
-    console.log('click => ', e);
-  }
+    //clickdown
+    this.ctx.canvas.addEventListener('mousedown', (event)=> {
 
-  mouseMove(e){
-    //console.log(e);
-  }
-  
-  eventListeners(){
-    this.ctx.canvas.addEventListener('mousedown', this.mouseDown, false);
-    this.ctx.canvas.addEventListener('mouseup', this.mouseUp, false);
-    this.ctx.canvas.addEventListener('mousemove', this.mouseMove, false);
+      //this.mouseUpdate();
+    });
+
+    //clickup
+    this.ctx.canvas.addEventListener('mouseup', (event)=> {
+      //this.shoot()
+    });
   }
 
 }

@@ -6,9 +6,11 @@ class Target {
     this.h = 80
 
     this.x = this.ctx.canvas.width + this.w
-    this.y = Math.random() * this.ctx.canvas.height - this.h
+    this.y = Math.random() * (680 - 570 ) + 570;
 
-    this.vx = -5
+    //esto está bien?????
+    this.vx = Math.random() * ((-6) - (-1) +1)
+    
   }
 
   draw(){
