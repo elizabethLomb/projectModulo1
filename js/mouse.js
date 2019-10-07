@@ -22,7 +22,7 @@ Game.prototype.mouseMove = function (evt) {
 
 Game.prototype.onKeyEvent = function (event) {
   this.player.onKeyEvent(event);
-};
+}; 
 
 Game.prototype.getMousePos = function (evt) {
   var rect = this.canvas.getBoundingClientRect();

@@ -7,7 +7,7 @@ class Background {
     this.y = 0 ;
 
     this.img = new Image()
-    this.img.src = "./img/bg.jpg"
+    this.img.src = "./img/ruined_city.png"
   }
 
   draw() {
@@ -21,6 +21,6 @@ class Background {
   }
 
 
-
+ 
   //move(){}
 } 

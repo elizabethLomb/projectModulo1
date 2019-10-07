@@ -10,4 +10,4 @@ window.onload = function() {
     game.start()
   }
   startGame();
-}
+} 

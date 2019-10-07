@@ -24,7 +24,7 @@ class Game {
 	runAnimationLoop() {
     this.intervalId = setInterval(() => {
       this.clear()
-      this.draw()
+      this.draw() 
       this.move()
       this.addTarget()
       this.checkCollisions()
@@ -64,7 +64,27 @@ class Game {
   }
 
   checkCollisions(){
-    true
+    const col = this.target.some(t => {
+      return t.collide(this.player.chanclas)
+    })
+
+    if (col) {
+      this._gameOver()
+    }
+  }
+
+  _gameOver() {
+    this.audio.pause()
+    clearInterval(this.intervalId)
+
+    this.gameOverAudio.play()
+    this.ctx.font = "40px Comic Sans MS";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(
+      "GAME OVER",
+      this.ctx.canvas.width / 2,
+      this.ctx.canvas.height / 2
+    );
   }
 
   /////// listeners ---------------------------

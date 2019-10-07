@@ -24,7 +24,7 @@ class Player {
 
     this.chanclas = []
     this.chanclaShoot = false;
-  }
+  } 
 
   draw(){
     this.ctx.drawImage(
