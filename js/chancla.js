@@ -8,15 +8,15 @@ class Chancla {
     this.endX = endX;
     this.endY = endY;
 
-    this.w = 80
-    this.h = 100
+    this.w = 70
+    this.h = 90
 
     this.vx = (endX - (this.w / 2) - x) / 100;
     this.vy = (endY - (this.h / 2) - y) / 100;
 
     this.img = new Image();
     this.img.src = "./img/chancla_sprite.png";
-    this.img.frames = 11;
+    this.img.frames = 12;
     this.img.frameIndex = 0;
 
     this.tick = 0;
@@ -48,20 +48,12 @@ class Chancla {
   }
 
   animate(){
-    if(this.tick++ < 8) return
+    if(this.tick++ < 2) return
 
     if (++this.img.frameIndex >= this.img.frames) {
-      //debugger
       this.img.frameIndex = 0;
       this.tick = 0;
     }
-  }
-
-  collide(el) {
-    const collideX = el.x + el.w > this.x && el.x < this.x + this.w
-    const collideY = el.y + el.h > this.y && el.y < this.y + this.h
- 
-    return collideX && collideY
   }
 
   isVisible() {

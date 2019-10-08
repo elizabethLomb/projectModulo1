@@ -76,7 +76,14 @@ class Player {
   }
 
   clearChanclas() {
-    this.chanclas = this.chanclas.filter(c => c.isVisible())
+    this.chanclas = this.chanclas.filter(chancla => chancla.isVisible())
+  }
+
+  collide(el) {
+    const colX = el.x + el.w > this.x && el.x < this.x + this.w
+    const colY = el.y + el.h > this.y && el.y < this.y + this.h
+
+    return colX && colY
   }
 
   setListeners(){

@@ -9,7 +9,7 @@ class Game {
     this.bg = new Background(ctx)
     this.player = new Player(ctx);
 
-    //this.hits = 0; //aciertos
+    this.hits = 0; //aciertos
     this.target = [] //targets on stage
 
 	}
@@ -64,20 +64,23 @@ class Game {
   }
 
   checkCollisions(){
-    const col = this.target.some(t => {
-      return t.collide(this.player.chanclas)
-    })
+    const col = (
+      this.target = this.target.filter(targets => {
+        return !this.player.chanclas.some(chancla => {
+          return targets.collide(chancla) 
+        })
+      })
+    )
 
-    if (col) {
-      this._gameOver()
+    if(col){
+      //console.log('hit');
     }
+
   }
 
-  _gameOver() {
-    this.audio.pause()
+  gameOver() {
     clearInterval(this.intervalId)
 
-    this.gameOverAudio.play()
     this.ctx.font = "40px Comic Sans MS";
     this.ctx.textAlign = "center";
     this.ctx.fillText(
