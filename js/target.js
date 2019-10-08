@@ -22,6 +22,9 @@ class Target {
     this.cutY = 0;
 
     this.tick = 0;
+
+    this.hit = 0;
+    this.score = 0;
     
   }
 
@@ -52,13 +55,26 @@ class Target {
       this.img.frameIndex = 0;
       this.tick = 0;
     }
+
+    if(this.hit > 0){
+      console.log('tengo que cambiar img');
+    }
   }
 
   collide(el) {
-    const colX = el.x + el.w > this.x && el.x < this.x + this.w
-    const colY = el.y + el.h > this.y && el.y < this.y + this.h
-
-    return colX && colY
+    if (
+      this.x < el.x + el.w &&
+      this.x + this.w > el.x &&
+      this.y < el.y + el.h &&
+      this.h + this.y > el.y
+    ) {
+      
+      //this.score++;
+      console.log("collide zombie");
+      this.hit += 1; //para cambiar img
+      //debugger
+      return true;
+    }
   }
 
   isVisible() {

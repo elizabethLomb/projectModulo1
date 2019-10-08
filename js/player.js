@@ -61,6 +61,10 @@ class Player {
     }
   }
 
+  clearChanclas() {
+    this.chanclas = this.chanclas.filter(c =>  c.isVisible())
+  }
+
   shoot(event){
     this.chanclaShoot = true;
     setTimeout(() => {
@@ -75,15 +79,16 @@ class Player {
     }, 500);
   }
 
-  clearChanclas() {
-    this.chanclas = this.chanclas.filter(chancla => chancla.isVisible())
-  }
-
   collide(el) {
-    const colX = el.x + el.w > this.x && el.x < this.x + this.w
-    const colY = el.y + el.h > this.y && el.y < this.y + this.h
-
-    return colX && colY
+    if (
+      this.x < el.x + el.w &&
+      this.x + this.w > el.x &&
+      this.y < el.y + el.h &&
+      this.h + this.y > el.y
+    ) {
+      console.log("collide chancla");
+      return true;
+    }
   }
 
   setListeners(){

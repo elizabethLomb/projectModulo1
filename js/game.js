@@ -9,7 +9,7 @@ class Game {
     this.bg = new Background(ctx)
     this.player = new Player(ctx);
 
-    this.hits = 0; //score
+    this.score = 0; //score
     this.target = [] //targets on stage
 
 	}
@@ -23,12 +23,12 @@ class Game {
 	//animation loop 
 	runAnimationLoop() {
     this.intervalId = setInterval(() => {
-      this.clear()
-      this.draw() 
-      this.move()
-      this.addTarget()
-      this.checkCollisions()
-      this.clearTarget()
+      this.clear();
+      this.draw(); 
+      this.move();
+      this.addTarget();
+      this.checkCollisions();
+      this.clearTarget();
       this.drawScore();
 
       if (this.tick++ > 10000) {
@@ -65,23 +65,19 @@ class Game {
   }
 
   checkCollisions(){
-
-    this.target = this.target.filter(targets => {
-      
+    this.target = this.target.filter(t => {
+      return !this.player.chanclas.some(c => t.collide(c))
     })
-
-    // this.target = this.target.filter(targets => {
-    //   return !this.player.chanclas.some(chancla => {
-    //     return targets.collide(chancla) 
-    //   })
-    // })
-
+    this.player.chanclas = this.player.chanclas.filter(chancla => {
+      return this.target.some(t => chancla.collide(t))
+    })
   }
 
   drawScore() {
+    //this.score = this.target.score
     this.ctx.font = "16px Arial";
     this.ctx.fillStyle = "#0095DD";
-    this.ctx.fillText("Score: "+this.hits, 8, 20);
+    this.ctx.fillText("Score: "+ this.score, 8, 20);
   }
 
   /////// listeners ---------------------------
@@ -90,8 +86,6 @@ class Game {
     this.ctx.canvas.addEventListener('mousemove', (event)=> {
       this.mouseX = event.clientX;
       this.mouseY = event.clientY;
-      console.log(this.mouseX, this.mouseY);
-
     });
 
     //clickdown
