@@ -9,7 +9,7 @@ class Game {
     this.bg = new Background(ctx)
     this.player = new Player(ctx);
 
-    this.hits = 0; //aciertos
+    this.hits = 0; //score
     this.target = [] //targets on stage
 
 	}
@@ -29,6 +29,7 @@ class Game {
       this.addTarget()
       this.checkCollisions()
       this.clearTarget()
+      this.drawScore();
 
       if (this.tick++ > 10000) {
         this.tick = 0
@@ -64,34 +65,26 @@ class Game {
   }
 
   checkCollisions(){
-    const col = (
-      this.target = this.target.filter(targets => {
-        return !this.player.chanclas.some(chancla => {
-          return targets.collide(chancla) 
-        })
-      })
-    )
 
-    if(col){
-      //console.log('hit');
-    }
+    this.target = this.target.filter(targets => {
+      
+    })
+
+    // this.target = this.target.filter(targets => {
+    //   return !this.player.chanclas.some(chancla => {
+    //     return targets.collide(chancla) 
+    //   })
+    // })
 
   }
 
-  gameOver() {
-    clearInterval(this.intervalId)
-
-    this.ctx.font = "40px Comic Sans MS";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText(
-      "GAME OVER",
-      this.ctx.canvas.width / 2,
-      this.ctx.canvas.height / 2
-    );
+  drawScore() {
+    this.ctx.font = "16px Arial";
+    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillText("Score: "+this.hits, 8, 20);
   }
 
   /////// listeners ---------------------------
-
   eventListeners(event){
     //mousemove
     this.ctx.canvas.addEventListener('mousemove', (event)=> {
