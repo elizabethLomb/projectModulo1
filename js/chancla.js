@@ -58,14 +58,13 @@ class Chancla {
   }
 
   collide(el) {
-    console.info('Es un array? => ', el)
     if (
       this.x < el.x + el.w &&
       this.x + this.w > el.x &&
       this.y < el.y + el.h &&
       this.h + this.y > el.y
     ) {
-      this.score++;
+      //this.score++;
       console.log("collide chancla");
       //debugger
       return true;

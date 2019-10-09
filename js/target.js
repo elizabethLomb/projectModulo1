@@ -2,9 +2,6 @@ class Target {
   constructor(ctx) {
     this.ctx = ctx;
 
-    this.w = 170;
-    this.h = 170;
-
     this.x = this.ctx.canvas.width + this.w
     this.y = Math.random() * (800 - 570 ) + 570;
 
@@ -14,16 +11,25 @@ class Target {
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
-    this.img.frames = 6;
-    this.img.width = 1162;
-    this.img.height = 420;
+
+    // this.w = 170;
+    // this.h = 170;
+
+
+    this.img.frames = 8;
+    this.img.width = 1550;
+    this.img.height = 374;
     this.img.frameIndex = 0;
     this.img.rows = 2;
     this.cutY = 0;
+    this.w = this.img.width / this.img.frames;
+    this.h = this.img.height / this.img.rows;
 
     this.tick = 0;
 
-    this.hit = 0;
+    this.hits = 0;
+    this.currentHits = this.hits;
+
     this.score = 0;
     
   }
@@ -56,23 +62,19 @@ class Target {
       this.tick = 0;
     }
 
-    if(this.hit > 0){
+    if(this.hits > 0){
+      this.cutY = 1;
+      this.vx = 0;
       console.log('tengo que cambiar img');
     }
   }
 
   collide(el) {
-    if (
-      this.x < el.x + el.w &&
-      this.x + this.w > el.x &&
-      this.y < el.y + el.h &&
-      this.h + this.y > el.y
-    ) {
-      
-      //this.score++;
-      console.log("collide zombie");
-      this.hit += 1; //para cambiar img
-      //debugger
+    if (this.x < el.x + el.w && this.x + this.w > el.x &&
+      this.y < el.y + el.h && this.h + this.y > el.y) {
+
+      this.currentHits++; //para cambiar img
+      console.log(`collide zombie`);
       return true;
     }
   }
