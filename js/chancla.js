@@ -71,10 +71,11 @@ class Chancla {
 
       //this.woosh.stop();
       this.chanclaHit.play();
-      this.hits--;
+      this.hits--
 
+      //this.score++;
       console.log("collide chancla");
-
+      //debugger
       //return true;
     }
   }

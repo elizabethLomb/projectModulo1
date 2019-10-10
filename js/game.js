@@ -72,20 +72,20 @@ class Game {
     let isChanclaColliding = this.player.chanclas.some(chancla => 
       this.target.some(target => target.collide(chancla)))
 
-    let isZombieColliding = this.target.some((targets => {
-      this.player.chanclas.some(chancla => chancla.collide(targets))
-    }))
+    // let isZombieColliding = this.target.some((targets => {
+    //   this.player.chanclas.some(chancla => chancla.collide(targets))
+    // }))
 
-    if(isChanclaColliding || isZombieColliding){
+    if(isChanclaColliding){
       //elimina chanclas
       this.player.chanclas = this.player.chanclas.filter(c => {
         c.hits <= 0
       })
       //elimina zombies
-      this.target = this.target.filter(t => {
-        t.hits <= 0
-      })
-      
+      // this.target = this.target.filter(t => {
+      //   t.hits <= 0
+      // })
+
     }
     
   }
