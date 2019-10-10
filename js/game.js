@@ -69,25 +69,28 @@ class Game {
 
   checkCollisions(){
 
-    //filter() para crear un array filtrado que excluye todos los elementos
+    let isChanclaColliding = this.player.chanclas.some(chancla => 
+      this.target.some(target => target.collide(chancla)))
 
-    // const someTargets = this.target.some((targets, chanclas) => {
-    //   return targets.collide(chanclas) // false
-    // })
+    let isZombieColliding = this.target.some((targets => {
+      this.player.chanclas.some(chancla => chancla.collide(targets))
+    }))
 
-   
-
-    this.target = this.target.filter(targets => {
-      return !this.player.chanclas.some(chancla => targets.collide(chancla))
-    })
-
-    // this.player.chanclas = this.player.chanclas.filter(chancla => {
-    //   return !this.target.some(targets => this.player.chanclas.collide(targets))
-    // })
+    if(isChanclaColliding || isZombieColliding){
+      //elimina chanclas
+      this.player.chanclas = this.player.chanclas.filter(c => {
+        c.hits <= 0
+      })
+      //elimina zombies
+      this.target = this.target.filter(t => {
+        t.hits <= 0
+      })
+      
+    }
+    
   }
 
   drawScore() {
-    //this.score++
     this.ctx.font = "16px Arial";
     this.ctx.fillStyle = "#0095DD";
     this.ctx.fillText("Score: "+ this.score, 8, 20);

@@ -18,11 +18,12 @@ class Chancla {
     this.img.src = "./img/chancla_sprite.png";
     this.img.frames = 12;
     this.img.frameIndex = 0;
-
+    this.hits = 1
     this.tick = 0;
     this.score = 0;
 
     this.woosh = new Audio('./audios/woosh2.mp3');
+    this.chanclaHit = new Audio('./audios/chanclaHit.mp3');
   }
 
   draw() {
@@ -61,18 +62,20 @@ class Chancla {
   }
 
   collide(el) {
-    this.woosh.stop();
-    //console.info('Es un array? => ', el)
     if (
       this.x < el.x + el.w &&
       this.x + this.w > el.x &&
       this.y < el.y + el.h &&
       this.h + this.y > el.y
     ) {
-      this.score++;
+
+      //this.woosh.stop();
+      this.chanclaHit.play();
+      this.hits--;
+
       console.log("collide chancla");
-      //debugger
-      return true;
+
+      //return true;
     }
   }
 

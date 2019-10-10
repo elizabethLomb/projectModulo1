@@ -6,9 +6,9 @@ class Target {
     this.h = 170;
 
     this.x = this.ctx.canvas.width + this.w
-    this.y = Math.random() * (800 - 570 ) + 570;
+    this.y = Math.random() * (700 - 670 ) + 570;
 
-    this.vx = -1;
+    this.vx = -0.5;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
@@ -46,27 +46,22 @@ class Target {
   }
 
   animate(){
-    if(++this.tick < 40){
-      return
-    }
-
+    if(++this.tick < 20) return
     this.tick = 0;
-
     if (++this.img.frameIndex >= this.img.frames) {
       this.img.frameIndex = 0
     }
-
-    // if(this.hits > 0){
-    //   console.log('tengo que cambiar img');
-    // }
   }
 
   collide(el) {
-    if (this.x < el.x + el.w && this.x + this.w > el.x &&
+    if (
+      this.x < el.x + el.w && this.x + this.w > el.x &&
       this.y < el.y + el.h && this.h + this.y > el.y) {
+
+        this.vx = 0;
         this.zombieDeath.play();
         this.cutY = 1;
-        console.log(`collide zombie`);
+        el.hits--
         return true;
     }
   }
