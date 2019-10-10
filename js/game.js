@@ -12,12 +12,15 @@ class Game {
     this.score = 0; //score
     this.target = [] //targets on stage
 
+    this.zombieHorde = new Audio('./audios/zombieHorde.mp3');
+
 	}
 
 	//inicializa el juego
 	start() {
     this.runAnimationLoop();
     this.eventListeners();
+    this.zombieHorde.play();
   }
 
 	//animation loop 
@@ -29,7 +32,7 @@ class Game {
       this.addTarget();
       this.checkCollisions();
       this.clearTarget();
-      this.drawScore();
+      //this.drawScore();
 
       if (this.tick++ > 10000) {
         this.tick = 0
@@ -72,16 +75,11 @@ class Game {
     //   return targets.collide(chanclas) // false
     // })
 
+   
+
     this.target = this.target.filter(targets => {
       return !this.player.chanclas.some(chancla => targets.collide(chancla))
     })
-    
-
-    
-
-    // this.target = this.target.filter(targets => {
-    //   return !this.player.chanclas.some(chancla => targets.collide(chancla))
-    // })
 
     // this.player.chanclas = this.player.chanclas.filter(chancla => {
     //   return !this.target.some(targets => this.player.chanclas.collide(targets))
@@ -102,17 +100,5 @@ class Game {
       this.mouseX = event.clientX;
       this.mouseY = event.clientY;
     });
-
-    //clickdown
-    this.ctx.canvas.addEventListener('mousedown', (event)=> {
-
-      //this.mouseUpdate();
-    });
-
-    //clickup
-    this.ctx.canvas.addEventListener('mouseup', (event)=> {
-      //this.shoot()
-    });
   }
-
 }

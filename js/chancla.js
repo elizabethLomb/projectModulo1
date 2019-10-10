@@ -8,8 +8,8 @@ class Chancla {
     this.endX = endX;
     this.endY = endY;
 
-    this.w = 70
-    this.h = 80
+    this.w = 80
+    this.h = 90
 
     this.vx = (endX - (this.w / 2) - x) / 100;
     this.vy = (endY - (this.h / 2) - y) / 100;
@@ -21,6 +21,8 @@ class Chancla {
 
     this.tick = 0;
     this.score = 0;
+
+    this.woosh = new Audio('./audios/woosh2.mp3');
   }
 
   draw() {
@@ -40,6 +42,7 @@ class Chancla {
   }
 
   move() {
+    this.woosh.play();
     if((this.x + this.w / 2) < this.endX) {
       this.x += this.vx;
     }
@@ -58,21 +61,19 @@ class Chancla {
   }
 
   collide(el) {
+    this.woosh.stop();
+    //console.info('Es un array? => ', el)
     if (
       this.x < el.x + el.w &&
       this.x + this.w > el.x &&
       this.y < el.y + el.h &&
       this.h + this.y > el.y
     ) {
-      //this.score++;
+      this.score++;
       console.log("collide chancla");
       //debugger
       return true;
     }
-  }
-
-  clear(){
-    
   }
 
   isVisible() {

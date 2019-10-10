@@ -6,8 +6,11 @@ class Background {
     this.x = 0;
     this.y = 0 ;
 
-    this.img = new Image()
-    this.img.src = "./img/ruined_city.png"
+    this.vx = 0.2
+
+    this.img = new Image();
+    this.img.src = "./img/ruined_city.png";
+
   }
 
   draw() {
@@ -18,9 +21,14 @@ class Background {
       this.w,
       this.h
     )
+
+    this.ctx.drawImage(
+      this.img,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    )
   }
 
-
- 
-  //move(){}
 } 

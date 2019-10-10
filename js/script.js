@@ -7,7 +7,7 @@ window.onload = function() {
 
   function startGame() {
     const game = new Game(ctx)
-    game.start()
+    game.start();
   }
   startGame();
 } 
