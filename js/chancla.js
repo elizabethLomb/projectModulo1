@@ -71,6 +71,10 @@ class Chancla {
     }
   }
 
+  clear(){
+    
+  }
+
   isVisible() {
     return (
       this.x + this.w > 0

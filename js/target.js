@@ -12,9 +12,8 @@ class Target {
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
 
-    // this.w = 170;
-    // this.h = 170;
-
+    this.w = 170;
+    this.h = 170;
 
     this.img.frames = 8;
     this.img.width = 1550;
@@ -22,8 +21,6 @@ class Target {
     this.img.frameIndex = 0;
     this.img.rows = 2;
     this.cutY = 0;
-    this.w = this.img.width / this.img.frames;
-    this.h = this.img.height / this.img.rows;
 
     this.tick = 0;
 
