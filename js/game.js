@@ -69,18 +69,20 @@ class Game {
 
   checkCollisions(){
 
-    let isChanclaColliding = this.player.chanclas.some(chancla => 
+    let isZombieColliding = this.player.chanclas.some(chancla => 
       this.target.some(target => target.collide(chancla)))
 
-    // let isZombieColliding = this.target.some((targets => {
-    //   this.player.chanclas.some(chancla => chancla.collide(targets))
-    // }))
+    let isChanclaColliding = this.target.some(targets => 
+      this.player.chanclas.some(chanclas => chanclas.collide(targets)))
 
-    if(isChanclaColliding){
+    //console.log(isChanclaColliding);
+
+    if(isZombieColliding || isChanclaColliding){
       //elimina chanclas
       this.player.chanclas = this.player.chanclas.filter(c => {
-        c.hits <= 0
+        c.hits <= 0;
       })
+      
       //elimina zombies
       // this.target = this.target.filter(t => {
       //   t.hits <= 0
@@ -102,6 +104,8 @@ class Game {
     this.ctx.canvas.addEventListener('mousemove', (event)=> {
       this.mouseX = event.clientX;
       this.mouseY = event.clientY;
+
+      //console.log(this.mouseX , this.mouseY)
     });
   }
 }

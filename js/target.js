@@ -6,9 +6,10 @@ class Target {
     this.h = 170;
 
     this.x = this.ctx.canvas.width + this.w
-    this.y = Math.random() * (700 - 670 ) + 570;
+    this.y = Math.random() * (1400 - 900 ) + 570;
 
-    this.vx = -0.5;
+    //this.vx = -0.5;
+    this.vx = -2;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
@@ -62,6 +63,7 @@ class Target {
         this.zombieDeath.play();
         this.cutY = 1;
         el.hits--
+        //console.log("zombie has collided");
         return true;
     }
   }
