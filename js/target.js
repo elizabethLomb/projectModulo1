@@ -1,6 +1,6 @@
 class Target {
   constructor(ctx) {
-    this.ctx = ctx;
+    this.ctx = ctx; 
 
     this.w = 170;
     this.h = 170;
@@ -8,8 +8,7 @@ class Target {
     this.x = this.ctx.canvas.width + this.w
     this.y = Math.random() * (1400 - 900 ) + 570;
 
-    //this.vx = -0.5;
-    this.vx = -2;
+    this.vx = -1;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
@@ -22,6 +21,7 @@ class Target {
     this.cutY = 0;
 
     this.tick = 0;
+    this.hits = 1;
 
     this.zombieDeath = new Audio('./audios/zombieSmash.mp3');
   }
@@ -54,16 +54,15 @@ class Target {
     }
   }
 
-  collide(el) {
+  collide(chancla) {
     if (
-      this.x < el.x + el.w && this.x + this.w > el.x &&
-      this.y < el.y + el.h && this.h + this.y > el.y) {
+      this.x < chancla.x + chancla.w && this.x + this.w > chancla.x &&
+      this.y < chancla.y + chancla.h && this.h + this.y > chancla.y) {
 
         this.vx = 0;
         this.zombieDeath.play();
         this.cutY = 1;
-        el.hits--
-        //console.log("zombie has collided");
+        //chancla.hits--
         return true;
     }
   }

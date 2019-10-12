@@ -18,9 +18,9 @@ class Chancla {
     this.img.src = "./img/chancla_sprite.png";
     this.img.frames = 12;
     this.img.frameIndex = 0;
-    this.hits = 1
+    
     this.tick = 0;
-    this.score = 0;
+    this.hits = 1;
 
     this.woosh = new Audio('./audios/woosh2.mp3');
     this.chanclaHit = new Audio('./audios/chanclaHit.mp3');
@@ -61,20 +61,18 @@ class Chancla {
     }
   }
 
-  collide(el) {
+  collide(enemy) {
     if (
-      this.x < el.x + el.w &&
-      this.x + this.w > el.x &&
-      this.y < el.y + el.h &&
-      this.h + this.y > el.y
+      this.x < enemy.x + enemy.w &&
+      this.x + this.w > enemy.x &&
+      this.y < enemy.y + enemy.h &&
+      this.h + this.y > enemy.y
     ) {
 
-      //this.woosh.stop();
+      this.woosh.pause();
       this.chanclaHit.play();
-      this.hits--
-      //this.score++;
-      console.log("chancla has collided");
-
+      enemy.hits--;
+      return true;
     }
   }
 

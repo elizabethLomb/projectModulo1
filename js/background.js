@@ -13,15 +13,7 @@ class Background {
 
   }
 
-  draw() {
-    this.ctx.drawImage(
-      this.img,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    )
-
+  draw() { 
     this.ctx.drawImage(
       this.img,
       this.x,
@@ -30,5 +22,4 @@ class Background {
       this.h
     )
   }
-
 } 

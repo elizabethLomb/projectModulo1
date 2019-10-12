@@ -16,7 +16,7 @@ class Player {
     this.img = new Image();
     this.img.src = "./img/character.png";
     this.img.frames = 5
-    this.img.frameIndex = 0
+    this.img.frameIndex = 0 
 
     this.tick = 0;
 

@@ -3,14 +3,15 @@ class Game {
 		this.ctx = ctx;
 		this.intervalId = null;
     this.tick = 0;
-    this.mouseX;
+    this.mouseX; 
     this.mouseY;
 
     this.bg = new Background(ctx)
     this.player = new Player(ctx);
-
+    
     this.score = 0; //score
     this.target = [] //targets on stage
+    this.bomb = [] //bonus1
 
     this.zombieHorde = new Audio('./audios/zombieHorde.mp3');
 
@@ -20,19 +21,19 @@ class Game {
 	start() {
     this.runAnimationLoop();
     this.eventListeners();
-    this.zombieHorde.play();
   }
 
 	//animation loop 
 	runAnimationLoop() {
     this.intervalId = setInterval(() => {
+      //this.zombieHorde.play();
       this.clear();
       this.draw(); 
       this.move();
-      this.addTarget();
+      this.addElments();
       this.checkCollisions();
       this.clearTarget();
-      //this.drawScore();
+      this.drawScore();
 
       if (this.tick++ > 10000) {
         this.tick = 0
@@ -44,11 +45,16 @@ class Game {
     this.target = this.target.filter( t => t.isVisible())
   }
 
-  addTarget(){
+  addElments(){
     if (this.tick % 100) return 
 
+    //add zombie
     this.target.push(
       new Target(this.ctx)
+    )
+
+    this.bomb.push(
+      new Bomb(this.ctx)
     )
   }
 
@@ -59,43 +65,48 @@ class Game {
 	draw() {
     this.bg.draw()
     this.player.draw();
-    this.target.forEach(targets => targets.draw()); 
+    this.target.forEach(targets => targets.draw());
+    this.bomb.forEach(b => b.draw());
   }
 
 	move(){
     this.player.move();
     this.target.forEach(t => t.move());
+    this.bomb.forEach(b => b.move());
   }
 
-  checkCollisions(){
 
+  checkCollisions(){
+    //Si algun zombie choca con chancla
     let isZombieColliding = this.player.chanclas.some(chancla => 
       this.target.some(target => target.collide(chancla)))
 
-    let isChanclaColliding = this.target.some(targets => 
-      this.player.chanclas.some(chanclas => chanclas.collide(targets)))
+    //si alguna chancla choca
+    let isChanclaColliding = this.target.some(target => //eachZombie
+      this.player.chanclas.some(chancla => chancla.collide(target))) //eachChancla
 
-    //console.log(isChanclaColliding);
+    //si alguna bomba choca
+    
 
     if(isZombieColliding || isChanclaColliding){
-      //elimina chanclas
+      this.score++;
+
+      //devuelve la chancla que colisiona y la borra
       this.player.chanclas = this.player.chanclas.filter(c => {
         c.hits <= 0;
       })
-      
-      //elimina zombies
-      // this.target = this.target.filter(t => {
-      //   t.hits <= 0
-      // })
 
+      //regresa los que no han colisionado
+      // this.target = this.target.filter(target => {
+      //   return !this.player.chanclas.some(chancla => chancla.collide(target))
+      // })
     }
-    
   }
 
   drawScore() {
-    this.ctx.font = "16px Arial";
-    this.ctx.fillStyle = "#0095DD";
-    this.ctx.fillText("Score: "+ this.score, 8, 20);
+    this.ctx.font = "32px Arial";
+    this.ctx.fillStyle = "#00000";
+    this.ctx.fillText("Score: "+ this.score, 20, 50);
   }
 
   /////// listeners ---------------------------
@@ -104,7 +115,6 @@ class Game {
     this.ctx.canvas.addEventListener('mousemove', (event)=> {
       this.mouseX = event.clientX;
       this.mouseY = event.clientY;
-
       //console.log(this.mouseX , this.mouseY)
     });
   }
