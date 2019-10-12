@@ -62,7 +62,7 @@ class Target {
         this.vx = 0;
         this.zombieDeath.play();
         this.cutY = 1;
-        //chancla.hits--
+        chancla.hits--
         return true;
     }
   }

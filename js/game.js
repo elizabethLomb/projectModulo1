@@ -53,9 +53,11 @@ class Game {
       new Target(this.ctx)
     )
 
-    this.bomb.push(
-      new Bomb(this.ctx)
-    )
+    if(this.scrore >= 1){
+      this.bomb.push(
+        new Bomb(this.ctx)
+      )
+    }
   }
 
 	clear() {
@@ -77,30 +79,81 @@ class Game {
 
 
   checkCollisions(){
-    //Si algun zombie choca con chancla
-    let isZombieColliding = this.player.chanclas.some(chancla => 
-      this.target.some(target => target.collide(chancla)))
 
-    //si alguna chancla choca
-    let isChanclaColliding = this.target.some(target => //eachZombie
-      this.player.chanclas.some(chancla => chancla.collide(target))) //eachChancla
+    let isCollided = (
+      this.player.chanclas.some(chancla => this.target.some(
+        target => target.collide(chancla)))
 
-    //si alguna bomba choca
-    
+      ||
 
-    if(isZombieColliding || isChanclaColliding){
+      this.target.some(target => this.player.chanclas.some(
+        chancla => chancla.collide(target)))
+
+      ||
+
+      this.bomb.some(target => this.target.some(
+        bomb => bomb.collide(target)))
+    )
+
+    if(isCollided){
       this.score++;
+      
+      // this.target = this.target.filter(t => {
+      //   return !this.player.chanclas.some(c => {
+      //     return t.collide(c);
+      //   })
+      // })
 
-      //devuelve la chancla que colisiona y la borra
       this.player.chanclas = this.player.chanclas.filter(c => {
-        c.hits <= 0;
+        return !this.target.some(t => {
+          return c.collide(t)
+        })
       })
 
-      //regresa los que no han colisionado
-      // this.target = this.target.filter(target => {
-      //   return !this.player.chanclas.some(chancla => chancla.collide(target))
-      // })
+      this.bomb = this.bomb.filter(b => {
+        return !this.target.some(t => {
+          return b.collide(t);
+        })
+      })
+
     }
+
+
+    // let isChanclaColliding = this.player.chanclas.some(chancla =>
+    //   this.target.some(target => target.collide(chancla)))
+
+    // if(isChanclaColliding){
+    //   this.player.chanclas = this.player.chanclas.filter(c => {
+    //     c.hits <= 0;
+    //   })
+    // }
+
+    // //Si algun zombie choca con chancla
+    // let isZombieColliding = this.player.chanclas.some(chancla => 
+    //   this.target.some(target => target.collide(chancla)))
+
+    // //si alguna chancla choca
+    // let isChanclaColliding = this.target.some(target => //eachZombie
+    //   this.player.chanclas.some(chancla => chancla.collide(target))) //eachChancla
+
+    // //si alguna bomba choca
+    // let isBombColliding = this.bomb.some(bomb => 
+    //   this.target.some(target => target.collide(bomb)))
+
+    // if(isZombieColliding || isChanclaColliding || isBombColliding){
+    //   
+
+
+      //devuelve la chancla que colisiona y la borra
+      // this.player.chanclas = this.player.chanclas.filter(c => {
+      //   c.hits <= 0;
+      // })
+
+      // this.bomb = this.bomb.filter(b => {
+      //   b.hits <= 0;
+      // })
+
+    
   }
 
   drawScore() {

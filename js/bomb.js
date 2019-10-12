@@ -69,6 +69,9 @@ class Bomb {
     ) {
 
       this.cutY = 1;
+      this.vy = 0;
+      this.gravity = 0;
+
       enemy.hits--;
       return true;
     }
