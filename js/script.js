@@ -5,9 +5,16 @@ window.onload = function() {
   ctx.canvas.width = window.innerWidth
   ctx.canvas.height = window.innerHeight
 
-  function startGame() {
-    const game = new Game(ctx)
-    game.start();
+  function startIntro() {
+    const introGame = new Intro(ctx);
+    introGame.start();
   }
-  startGame();
+
+  startIntro();
+
+  // function startGame() {
+  //   const game = new Game(ctx)
+  //   game.start();
+  // }
+  // startGame();
 } 

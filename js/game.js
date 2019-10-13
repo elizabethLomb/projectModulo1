@@ -26,7 +26,7 @@ class Game {
 	//animation loop 
 	runAnimationLoop() {
     this.intervalId = setInterval(() => {
-      //this.zombieHorde.play();
+      this.zombieHorde.play();
       this.clear();
       this.draw(); 
       this.move();
@@ -53,7 +53,7 @@ class Game {
       new Target(this.ctx)
     )
 
-    if(this.scrore >= 1){
+    if(this.score >= 15 && this.score <= 20){
       this.bomb.push(
         new Bomb(this.ctx)
       )
@@ -86,23 +86,47 @@ class Game {
     let isZombieColliding = this.target.some(zombie => 
       this.player.chanclas.some(chancla => chancla.collide(zombie)))
 
+    let isBombColliding = this.bomb.some(bomb => 
+      this.target.some(zombie => zombie.collide(bomb)))
+
+    
+    //desaparece zombie con chancla
     this.target = this.target.filter(t => {
       return !this.player.chanclas.some(c => {
         return t.collide(c)
       })
     })
 
-    if(isChanclaColliding || isZombieColliding){
-      this.score++;
+    //desaparece zombie con bomba
+    this.target = this.target.filter(t => {
+      return !this.bomb.some(b => {
+        return t.collide(b)
+      })
+    })
 
+    if(isChanclaColliding || isZombieColliding || isBombColliding){
+      this.score++;
       this.player.chanclas = this.player.chanclas.filter(c => { c.hits <= 0 })
     }
   }
 
+  //dibujamos el score en pantalla
   drawScore() {
-    this.ctx.font = "32px Arial";
-    this.ctx.fillStyle = "#00000";
+    this.ctx.font = "40px Arial";
+    this.ctx.fillStyle = "#ffffff";
     this.ctx.fillText("Score: "+ this.score, 20, 50);
+  }
+
+  gameOver() {
+    clearInterval(this.intervalId)
+
+    this.ctx.font = "40px Comic Sans MS";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText(
+      "GAME OVER",
+      this.ctx.canvas.width / 2,
+      this.ctx.canvas.height / 2
+    );
   }
 
   /////// listeners ---------------------------

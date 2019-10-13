@@ -49,9 +49,6 @@ class Bomb {
   move(){
     this.vy += this.ay;
     this.vy += this.gravity;
-    // this.xy += this.ax;
-    // this.xy += this.vx;
-
     this.x += this.vx;
     this.y += this.vy;
   }

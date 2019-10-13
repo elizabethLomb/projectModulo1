@@ -8,7 +8,7 @@ class Target {
     this.x = this.ctx.canvas.width + this.w
     this.y = Math.random() * (1400 - 900 ) + 570;
 
-    this.vx = -1;
+    this.vx = -0.7;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
@@ -71,6 +71,10 @@ class Target {
     return (
       this.x + this.w > 0
     )
+  }
+
+  outOfBoundires(){
+    return (this.x >= this.ctx.canvas.width - this.w) * 0.9
   }
 
 }
