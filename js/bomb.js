@@ -35,14 +35,14 @@ class Bomb {
   draw() {
     this.ctx.drawImage(
       this.img,//image
-      this.img.frameIndex * Math.floor(this.img.width / this.img.frames), //sx
-      this.img.height * this.cutY / this.img.rows, //sy
-      this.img.width / this.img.frames, //sWidth
-      this.img.height / this.img.rows, //sHeight
-      this.x, // dx
-      this.y, //dy
-      this.w, //dWidth
-      this.h //dHeight
+      this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
+      this.img.height * this.cutY / this.img.rows, 
+      this.img.width / this.img.frames, 
+      this.img.height / this.img.rows, 
+      this.x,
+      this.y,
+      this.w,
+      this.h
     );
   }
 

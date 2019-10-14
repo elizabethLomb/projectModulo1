@@ -9,8 +9,8 @@ window.onload = function() {
     const introGame = new Intro(ctx);
     introGame.start();
   }
-
-  startIntro();
+  setTimeout(() => startIntro(), 2000);
+  
 
   // function startGame() {
   //   const game = new Game(ctx)

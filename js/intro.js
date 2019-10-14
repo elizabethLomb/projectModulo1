@@ -6,7 +6,7 @@ class Intro {
     this.intervalId = null;
     this.tick = 0;
 
-    this.vy = 1.2;
+    this.vy = 1.1;
     this.y = 800;
 
     this.startGame = new Game(ctx);
@@ -68,7 +68,6 @@ class Intro {
     this.y -= this.vy
   }
 
-  //dibujamos el pres play
   drawPlay() {
     if(this.y < -1300){
       this.ctx.font = "40px Consolas";

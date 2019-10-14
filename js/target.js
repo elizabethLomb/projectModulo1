@@ -8,7 +8,7 @@ class Target {
     this.x = this.ctx.canvas.width + this.w
     this.y = Math.random() * (1400 - 900 ) + 570;
 
-    this.vx = -0.7;
+    this.vx = -0.6;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";
@@ -29,14 +29,14 @@ class Target {
   draw() {
     this.ctx.drawImage(
       this.img,//image
-      this.img.frameIndex * Math.floor(this.img.width / this.img.frames), //sx
-      this.img.height * this.cutY / this.img.rows, //sy
-      this.img.width / this.img.frames, //sWidth
-      this.img.height / this.img.rows, //sHeight
-      this.x, // dx
-      this.y, //dy
-      this.w, //dWidth
-      this.h //dHeight
+      this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
+      this.img.height * this.cutY / this.img.rows,
+      this.img.width / this.img.frames,
+      this.img.height / this.img.rows, 
+      this.x, 
+      this.y, 
+      this.w, 
+      this.h 
     );
 
     this.animate();
