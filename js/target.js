@@ -6,9 +6,9 @@ class Target {
     this.h = 170;
 
     this.x = this.ctx.canvas.width + this.w
-    this.y = Math.random() * (1400 - 900 ) + 570;
+    this.y = Math.random() * (320 - 550 ) + 570;
 
-    this.vx = -0.6;
+    this.vx = -0.4;
 
     this.img = new Image();
     this.img.src = "./img/zombie_sprite2.png";

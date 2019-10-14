@@ -53,9 +53,7 @@ class Game {
       new Target(this.ctx)
     )
 
-    if(this.score >= 15 && this.score <= 30 && 
-      this.score >= 40 && this.score <= 60 &&
-      this.score >= 90){
+    if(this.score >= 10 && this.score <= 60){
       this.bomb.push(
         new Bomb(this.ctx)
       )

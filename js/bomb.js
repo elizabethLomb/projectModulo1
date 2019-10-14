@@ -5,8 +5,9 @@ class Bomb {
     this.w = 112;
     this.h = 137;
 
-    this.x = Math.random() * this.ctx.canvas.width - this.w;
-    this.y = -10;
+    this.x = Math.random() * this.ctx.canvas.width
+      - this.w;
+    this.y = -5;
 
     this.tick = 0;
     this.hits = 1;

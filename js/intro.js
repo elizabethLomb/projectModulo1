@@ -7,7 +7,7 @@ class Intro {
     this.tick = 0;
 
     this.vy = 1.1;
-    this.y = 800;
+    this.y = 600;
 
     this.startGame = new Game(ctx);
 
